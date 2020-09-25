@@ -10,23 +10,26 @@ import {
   Item,
   Toast,
 } from 'native-base';
+import globalStyles from '../styles/global';
+
 const Login = () => {
   return (
-    <Container>
-      <View>
+    <Container style={[globalStyles.container, {backgroundColor: '#E84347'}]}>
+      <View style={globalStyles.content}>
         <H1>UpTask</H1>
         <Form>
-          <Item inlineLabel last>
+          <Item inlineLabel last style={globalStyles.input}>
             <Input autoCompleteType="email" placeholder="Email" />
           </Item>
-          <Item inlineLabel last>
+          <Item inlineLabel last style={globalStyles.input}>
             <Input secureTextEntry={true} placeholder="Password" />
           </Item>
         </Form>
-        <Button>
-          <Text>Iniciar Sesión</Text>
+        <Button square block style={globalStyles.button}>
+          <Text style={globalStyles.buttonText}>Iniciar Sesión</Text>
         </Button>
-        <Text>Crear Cuenta</Text>
+
+        <Text style={globalStyles.link}>Crear Cuenta</Text>
       </View>
     </Container>
   );
