@@ -11,8 +11,11 @@ import {
   Toast,
 } from 'native-base';
 import globalStyles from '../styles/global';
-
+import {useNavigation} from '@react-navigation/native';
 const Login = () => {
+  // React navigation
+  const navigation = useNavigation();
+
   return (
     <Container style={[globalStyles.container, {backgroundColor: '#E84347'}]}>
       <View style={globalStyles.content}>
@@ -29,7 +32,11 @@ const Login = () => {
           <Text style={globalStyles.buttonText}>Iniciar Sesión</Text>
         </Button>
 
-        <Text style={globalStyles.link}>Crear Cuenta</Text>
+        <Text
+          onPress={() => navigation.navigate('NewAccount')}
+          style={globalStyles.link}>
+          Crear Cuenta
+        </Text>
       </View>
     </Container>
   );
