@@ -7,6 +7,7 @@ const Stack = createStackNavigator();
 import {Root} from 'native-base';
 import Login from './views/Login';
 import NewAccount from './views/NewAccount';
+import Projects from './views/Projects';
 
 const App = () => {
   return (
@@ -27,6 +28,20 @@ const App = () => {
               component={NewAccount}
               options={{
                 title: 'Crear cuenta',
+                headerStyle: {
+                  backgroundColor: '#28303B',
+                },
+                headerTintColor: '#FFF',
+                headerTitleStyle: {
+                  fontWeight: 'bold',
+                },
+              }}
+            />
+            <Stack.Screen
+              name="Projects"
+              component={Projects}
+              options={{
+                title: 'Projects',
                 headerStyle: {
                   backgroundColor: '#28303B',
                 },

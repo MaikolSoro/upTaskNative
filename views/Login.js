@@ -11,6 +11,7 @@ import {
   Toast,
 } from 'native-base';
 import globalStyles from '../styles/global';
+import AsyncStorage from '@react-native-community/async-storage';
 import {useNavigation} from '@react-navigation/native';
 import {gql, useMutation} from '@apollo/client';
 
@@ -59,8 +60,9 @@ const Login = () => {
       });
       const {token} = data.authenticateUser;
       // place token storage
-
+      await AsyncStorage.setItem('token', token);
       // Redirect a projects
+      navigation.navigate('Projects');
     } catch (error) {
       saveMessage(error.message.replace('GraphQL error:', ''));
     }
