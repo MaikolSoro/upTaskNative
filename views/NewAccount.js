@@ -54,8 +54,10 @@ const NewAccount = () => {
           },
         },
       });
+      saveMessage(data.createUser);
+      navigation.navigate('Login');
     } catch (error) {
-      console.log(error);
+      saveMessage(error.message.replace('GraphQL error:', ''));
     }
   };
 
