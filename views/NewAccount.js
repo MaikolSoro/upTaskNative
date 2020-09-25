@@ -1,6 +1,7 @@
 import React from 'react';
 import {View} from 'react-native';
 import globalStyles from '../styles/global';
+import {gql, useMutation} from '@apollo/client';
 import {
   Container,
   Button,
@@ -11,6 +12,12 @@ import {
   Item,
   Toast,
 } from 'native-base';
+
+const NEW_ACCOUNT = gql`
+  mutation createUser($input: UserInput) {
+    createUser(input: $input)
+  }
+`;
 const NewAccount = () => {
   // state the form
   const [name, saveName] = useState('');
@@ -19,8 +26,11 @@ const NewAccount = () => {
 
   const [message, saveMessage] = useState(null);
 
+  // mutation apollo
+  const [createUser] = useMutation(NEW_ACCOUNT);
+
   // where the user press in new account
-  const handleSubmit = () => {
+  const handleSubmit = async () => {
     // validate
     if (name === '' || email === '' || password === '') {
       //  show a error
@@ -33,6 +43,20 @@ const NewAccount = () => {
       return;
     }
     // save the user
+
+    try {
+      const {data} = await createUser({
+        variables: {
+          input: {
+            name,
+            email,
+            password,
+          },
+        },
+      });
+    } catch (error) {
+      console.log(error);
+    }
   };
 
   const showAlert = () => {
