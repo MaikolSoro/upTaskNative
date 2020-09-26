@@ -37,5 +37,13 @@ const globalStyles = StyleSheet.create({
     fontSize: 18,
     textTransform: 'uppercase',
   },
+  subtitle: {
+    textAlign: 'center',
+    marginBottom: 20,
+    fontSize: 26,
+    fontWeight: 'bold',
+    color: '#FFF',
+    marginTop: 20,
+  },
 });
 export default globalStyles;
