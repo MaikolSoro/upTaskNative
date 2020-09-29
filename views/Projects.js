@@ -39,8 +39,29 @@ const Projects = () => {
         <Text style={globalStyles.buttonText}>Nuevo Proyecto</Text>
       </Button>
       <H2 style={globalStyles.subtitle}>Selecciona un project</H2>
+
+      <Content>
+        <List style={styles.content}>
+          {data.getProjects.map((project) => {
+            <ListItem
+              key={project.id}
+              onPress={() => navigation.navigate('Project')}>
+              <Left>
+                <Text>{project.name}</Text>
+              </Left>
+              <Right></Right>
+            </ListItem>;
+          })}
+        </List>
+      </Content>
     </Container>
   );
 };
+const styles = StyleSheet.create({
+  content: {
+    backgroundColor: '#FFF',
+    marginHorizontal: '2.5%',
+  },
+});
 
 export default Projects;
