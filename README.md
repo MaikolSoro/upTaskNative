@@ -2,6 +2,9 @@
 An application to manage a user's tasks
 ## ✔ Technologies
 - [React-Native Documentation](https://reactnative.dev/)
+- [GraphQL Documentation](https://graphql.org/).
+- [Apollo Client Documentation](https://www.apollographql.com/apollo-client)
+
 ## 🚀 Installation
 
    ## Prerequisites
