@@ -9,6 +9,8 @@ import Login from './views/Login';
 import NewAccount from './views/NewAccount';
 import Projects from './views/Projects';
 import NewProject from './views/NewProject';
+import Project from './views/Project';
+
 const App = () => {
   return (
     <>
@@ -64,6 +66,20 @@ const App = () => {
                   fontWeight: 'bold',
                 },
               }}
+            />
+            <Stack.Screen
+              name="Project"
+              component={Project}
+              options={({route}) => ({
+                title: route.params.name,
+                headerStyle: {
+                  backgroundColor: '#28303B',
+                },
+                headerTintColor: '#FFF',
+                headerTitleStyle: {
+                  fontWeight: 'bold',
+                },
+              })}
             />
           </Stack.Navigator>
         </NavigationContainer>
