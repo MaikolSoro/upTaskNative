@@ -12,9 +12,23 @@ import {
 } from 'native-base';
 import {useNavigation} from '@react-navigation/native';
 import globalStyles from '../styles/global';
+import {gql, useQuery} from '@apollo/client';
+
+const GET_PROJECTS = gql`
+  query getProjects {
+    getProjects {
+      id
+      name
+    }
+  }
+`;
 const Projects = () => {
   // React navigation
   const navigation = useNavigation();
+  // query apollo
+  const {data, loading, error} = useQuery(GET_PROJECTS);
+  if (loading) return <Text>Cargando...</Text>;
+
   return (
     <Container style={([globalStyles.container], {backgroundColor: '#E84347'})}>
       <Button
