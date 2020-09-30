@@ -83,7 +83,8 @@ const Login = () => {
             <Input
               autoCompleteType="email"
               placeholder="Email"
-              onChangeText={(text) => saveEmail(text)}
+              onChangeText={(text) => saveEmail(text.toLowerCase())}
+              value={email}
             />
           </Item>
           <Item inlineLabel last style={globalStyles.input}>
