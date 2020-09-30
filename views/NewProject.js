@@ -12,7 +12,7 @@ import {
 } from 'native-base';
 import globalStyles from '../styles/global';
 import {useNavigation} from '@react-navigation/native';
-import {gql, useMutation} from '@apollo/client';
+import {gql, useMutation, useQuery} from '@apollo/client';
 
 const NEW_PROJECT = gql`
   mutation newProject($input: ProjectInput) {
