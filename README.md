@@ -21,3 +21,4 @@ An application to manage a user's tasks
   ## 📷 Preview
 ![Screenshot_1600889328](https://user-images.githubusercontent.com/46753453/94063972-2d062f80-fda6-11ea-810e-16b5a230ef41.png)
 ![Screenshot_1600891287](https://user-images.githubusercontent.com/46753453/94063976-2e375c80-fda6-11ea-8a43-775432a147f0.png)
+![Screenshot_1601436884](https://user-images.githubusercontent.com/46753453/94752553-cc986480-0348-11eb-8b3a-dcae07d4cf6f.png)
