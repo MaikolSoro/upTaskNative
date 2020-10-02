@@ -12,7 +12,7 @@ import {
 } from 'native-base';
 
 import globalStyles from '../styles/global';
-import {gql, useMutation} from '@apollo/client';
+import {gql, useMutation, useQuery} from '@apollo/client';
 
 // Create news tasks
 const NEW_TASK = gql`
@@ -25,12 +25,36 @@ const NEW_TASK = gql`
     }
   }
 `;
-const Project = ({route}) => {
+
+// consult the task the project
+
+const GET_TASKS = gql`
+  query getTasks($input: ProjectIDInput) {
+    getTasks(input: $input) {
+      id
+      name
+      state
+    }
+  }
+`;
+const Project = ({ route }) => {
+  
+  // getting the id the project
+  const { id } = route.params;
   const [name, saveName] = useState('');
   const [message, saveMessage] = useState(null);
 
   // mutation apollo
   const [newTask] = useMutation(NEW_TASK);
+
+  // apollo get tasks
+  const { data, loading, error } = useQuery(GET_TASKS, {
+    variables: {
+      input: {
+        project: id
+      }
+    }
+  });
   // Validate and create tasks
 
   const handleSubmit = () => {
@@ -46,7 +70,7 @@ const Project = ({route}) => {
         variables: {
           input: {
             name,
-            project: route.params.id
+            project: id
           }
         }
       });
@@ -67,6 +91,8 @@ const Project = ({route}) => {
       duration: 5000,
     });
   };
+  
+  if(loading) return <Text>Cargando...</Text>
   return (
     <Container style={([globalStyles.Container], {backgroundColor: '#e84347'})}>
       <Form style={{marginHorizontal: '2.5%', marginTop: 20}}>
