@@ -13,6 +13,8 @@ import {
 
 import globalStyles from '../styles/global';
 import {gql, useMutation, useQuery} from '@apollo/client';
+import Task from '../components/Task'
+import { StyleSheet } from 'react-native';
 
 // Create news tasks
 const NEW_TASK = gql`
@@ -111,9 +113,22 @@ const Project = ({ route }) => {
           <Text>Crear Tarea</Text>
         </Button>
       </Form>
+      <H2 style={globalStyles.subtitle}>Tareas:{route.params.name}</H2>
+      <Content>
+        <List style={styles.content}>
+          {data.getTaks.map(task => (
+            <Task key={task.id} task={task} />
+          ))}
+        </List>
+      </Content>
       {message && showAlert()}
     </Container>
   );
 };
-
+const styles = StyleSheet.create({
+  content: {
+    backgroundColor: '#FFF',
+    marginHorizontal: '2.5%',
+  },
+});
 export default Project;
