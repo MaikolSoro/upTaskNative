@@ -8,7 +8,7 @@ const Task = ({task}) => {
           <Text>{task.name}</Text>
         </Left>
         <Right>
-          <Text>Icono aqui</Text>
+          <Icon name="ios-checkmark-circle" />
         </Right>
       </ListItem>
     </>
