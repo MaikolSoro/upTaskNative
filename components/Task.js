@@ -19,11 +19,45 @@ const DELETE_TASK = gql`
     deleteTask(id: $id)
   }
 `;
+// consult the task the project
+const GET_TASKS = gql`
+  query getTasks($input: ProjectIDInput) {
+    getTasks(input: $input) {
+      id
+      name
+      state
+    }
+  }
+`;
 
-const Task = ({task}) => {
+const Task = ({task, projectId}) => {
   // Apollo
   const [updateTask] = useMutation(UPDATE_TASK);
-  const [deleteTask] = useMutation(DELETE_TASK);
+  const [deleteTask] = useMutation(DELETE_TASK, {
+    update(cache) {
+      const {getTasks} = cache.readQuery({
+        query: GET_TASKS,
+        variables: {
+          input: {
+            project: projectId,
+          },
+        },
+      });
+      cache.writeQuery({
+        query: GET_TASKS,
+        variables: {
+          input: {
+            project: projectId,
+          },
+        },
+        data: {
+          getTasks: getTasks.filter(
+            (taskCurrent) => taskCurrent.id !== task.id,
+          ),
+        },
+      });
+    },
+  });
 
   // change the status of a task complete or incomplete
   const changeState = async () => {
