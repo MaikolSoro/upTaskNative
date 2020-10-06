@@ -47,7 +47,30 @@ const Project = ({ route }) => {
   const [message, saveMessage] = useState(null);
 
   // mutation apollo
-  const [newTask] = useMutation(NEW_TASK);
+  const [newTask] = useMutation(NEW_TASK, {
+    update(cache, { data: { newTask } }) {
+      const { getTasks } = cache.readQuery({
+        query: GET_TASKS,
+        variables: {
+          input: {
+            project: id,
+          },
+        }
+      });
+      cache.writeQuery({
+        query: GET_TASKS,
+        variables: {
+          input: {
+            project: id,
+          },
+        },
+        data: {
+          getTasks:[... getTasks, newTask] 
+        }
+      })
+    }
+  });
+
 
   // apollo get tasks
   const { data, loading, error } = useQuery(GET_TASKS, {
