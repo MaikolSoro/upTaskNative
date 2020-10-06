@@ -117,7 +117,7 @@ const Project = ({ route }) => {
       <Content>
         <List style={styles.content}>
           {data.getTaks.map(task => (
-            <Task key={task.id} task={task} />
+            <Task key={task.id} task={task} projectId={id} />
           ))}
         </List>
       </Content>
