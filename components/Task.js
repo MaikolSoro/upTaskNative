@@ -1,5 +1,5 @@
 import React from 'react';
-import {StyleSheet} from 'react-native';
+import {StyleSheet, Alert} from 'react-native';
 import {Text, ListItem, Left, Right, Icon, Toast} from 'native-base';
 import {gql, useMutation} from '@apollo/client';
 
@@ -14,9 +14,17 @@ const UPDATE_TASK = gql`
   }
 `;
 
+const DELETE_TASK = gql`
+  mutation deleteTask($id: ID!) {
+    deleteTask(id: $id)
+  }
+`;
+
 const Task = ({task}) => {
   // Apollo
   const [updateTask] = useMutation(UPDATE_TASK);
+  const [deleteTask] = useMutation(DELETE_TASK);
+
   // change the status of a task complete or incomplete
   const changeState = async () => {
     // get the ID of task
@@ -35,9 +43,37 @@ const Task = ({task}) => {
       console.log(error);
     }
   };
+
+  //  Dialog to delete or not a task
+  const showDelete = () => {
+    Alert.alert('Eliminar task', '¿Deseas eliminar está tarea?', [
+      {
+        text: 'Cancelar',
+        style: 'cancel',
+      },
+      {
+        text: 'Confirmar',
+        onPress: () => deleteTaskDB(),
+      },
+    ]);
+  };
+  // Delete task of the bd
+  const deleteTaskDB = async () => {
+    const {id} = task;
+    try {
+      const {data} = await deleteTask({
+        variables: {
+          id,
+        },
+      });
+      console.log(data);
+    } catch (error) {
+      console.log(error);
+    }
+  };
   return (
     <>
-      <ListItem onPress={() => changeState()}>
+      <ListItem onPress={() => changeState()} onLongPress={() => showDelete()}>
         <Left>
           <Text>{task.name}</Text>
         </Left>
