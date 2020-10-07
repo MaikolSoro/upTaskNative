@@ -1,5 +1,5 @@
 ## upTaskNative
-An application to manage a user's tasks
+An application that creates projects and also tasks to keep track of that project🌐👨‍💻📝
 ## ✔ Technologies
 - [React-Native Documentation](https://reactnative.dev/)
 - [GraphQL Documentation](https://graphql.org/).
